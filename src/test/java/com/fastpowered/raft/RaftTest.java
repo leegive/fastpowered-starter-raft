@@ -1,6 +1,6 @@
 package com.fastpowered.raft;
 
-import com.fastpowered.raft.current.RaftThreadProperties;
+import com.fastpowered.raft.config.RaftThreadProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

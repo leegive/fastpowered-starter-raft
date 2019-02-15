@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.fastpowered.raft.RaftAutoConfiguration
+  com.fastpowered.raft.config.RaftAutoConfiguration

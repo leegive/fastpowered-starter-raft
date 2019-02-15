@@ -1,4 +1,4 @@
-package com.fastpowered.raft.current;
+package com.fastpowered.raft.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
