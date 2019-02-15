@@ -14,14 +14,16 @@ public class RaftThreadPool {
     private int queueSize;
     private long keepTime;
 
-    private ScheduledExecutorService ses = getScheduled();
-    private ThreadPoolExecutor tpe = getThreadPool();
+    private ScheduledExecutorService ses;
+    private ThreadPoolExecutor tpe;
 
     public RaftThreadPool(RaftThreadProperties properties) {
         log.info("Initializing RaftThreadPool");
         this.maxPoolSize = properties.getMaxPoolSize();
         this.queueSize = properties.getQueueSize();
         this.keepTime = properties.getKeepTime();
+        this.ses = getScheduled();
+        this.tpe = getThreadPool();
     }
 
     public void scheduleAtFixedRate(Runnable runnable, long initDelay, long delay) {

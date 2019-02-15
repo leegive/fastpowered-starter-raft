@@ -15,11 +15,10 @@ import org.springframework.context.annotation.Configuration;
 })
 public class RaftAutoConfiguration {
 
-//    @Bean
-//    @ConditionalOnMissingBean
-//    public RaftThreadPool raftThreadPool(RaftThreadProperties properties) {
-//        System.out.println("aaaaaaaaaaa");
-//        return new RaftThreadPool(properties);
-//    }
+    @Bean
+    @ConditionalOnMissingBean
+    public RaftThreadPool raftThreadPool(RaftThreadProperties properties) {
+        return new RaftThreadPool(properties);
+    }
 
 }

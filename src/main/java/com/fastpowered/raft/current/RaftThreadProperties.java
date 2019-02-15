@@ -13,7 +13,4 @@ public class RaftThreadProperties {
     private int queueSize = 1024;
     private long keepTime = 60000;
 
-    public RaftThreadProperties() {
-        System.out.println("***********************");
-    }
 }
