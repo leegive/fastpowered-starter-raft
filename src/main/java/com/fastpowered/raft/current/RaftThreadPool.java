@@ -1,7 +1,10 @@
 package com.fastpowered.raft.current;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.*;
 
+@Slf4j
 public class RaftThreadPool {
 
     public static int CPU = Runtime.getRuntime().availableProcessors();
@@ -15,6 +18,7 @@ public class RaftThreadPool {
     private ThreadPoolExecutor tpe = getThreadPool();
 
     public RaftThreadPool(RaftThreadProperties properties) {
+        log.info("Initializing RaftThreadPool");
         this.maxPoolSize = properties.getMaxPoolSize();
         this.queueSize = properties.getQueueSize();
         this.keepTime = properties.getKeepTime();

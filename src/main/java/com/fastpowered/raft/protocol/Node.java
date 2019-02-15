@@ -14,6 +14,13 @@ public interface Node {
     void setOptions(RaftOptions options);
 
     /**
+     * 投票预请求
+     * @param param
+     * @return
+     */
+    RvoteResult handlerPreRequestVote(RvoteParam param);
+
+    /**
      * 处理投票请求
      * @param param
      * @return
