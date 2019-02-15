@@ -1,6 +1,5 @@
 package com.fastpowered.raft.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -9,7 +8,6 @@ import java.io.Serializable;
  * 候选人请求投票结果
  */
 @Data
-@Builder
 public class RvoteResult implements Serializable {
 
     /**

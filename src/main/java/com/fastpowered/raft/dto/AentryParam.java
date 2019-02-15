@@ -2,12 +2,14 @@ package com.fastpowered.raft.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 附加日志请求参数
  */
 @Data
 @Builder
+@EqualsAndHashCode(callSuper = false)
 public class AentryParam extends BaseParam {
 
     /**
