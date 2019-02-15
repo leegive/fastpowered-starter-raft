@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
  * 候选人请求投票参数
  */
 @Data
-@Builder
 @EqualsAndHashCode(callSuper = false)
 public class RvoteParam extends BaseParam {
 

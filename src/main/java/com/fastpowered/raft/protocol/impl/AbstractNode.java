@@ -1,7 +1,9 @@
 package com.fastpowered.raft.protocol.impl;
 
+import com.fastpowered.raft.current.RaftThreadPool;
 import com.fastpowered.raft.dto.RaftOptions;
 import com.fastpowered.raft.protocol.LifeCycle;
+import com.fastpowered.raft.protocol.LogModule;
 import com.fastpowered.raft.protocol.Node;
 import com.fastpowered.raft.protocol.NodeStatus;
 
@@ -32,10 +34,27 @@ public abstract class AbstractNode implements Node, LifeCycle {
      */
     protected volatile long preHeartBeatTime = 0;
 
+    /**
+     * 最后一次知道的任期号，初始化为0，持续递增
+     */
+    protected volatile long currentTerm = 0;
+
+    /**
+     * 给谁投票
+     */
+    protected volatile String votedFor;
+
+    protected Cluster cluster = Cluster.getInstance();
+
+    protected LogModule logModule;
+
+    protected RaftThreadPool threadPool;
+
     @Override
     public void setOptions(RaftOptions options) {
         this.electionTime = options.getElectionTime();
         this.heartBeatTick = options.getHeartBeatTick();
+        logModule = new DefaultLogModule();
     }
 
     @Override

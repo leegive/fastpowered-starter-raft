@@ -1,8 +1,11 @@
 package com.fastpowered.raft.protocol.impl;
 
 import com.fastpowered.raft.dto.*;
+import com.fastpowered.raft.rpc.Request;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.fastpowered.raft.protocol.NodeStatus.CANDIDATE;
@@ -48,8 +51,42 @@ public class DefaultNode extends AbstractNode {
             if (currentTime - preElectionTime < electionTime) {
                 return;
             }
+
             status = CANDIDATE;
-            log.debug("Node {} will become CANDIDATE and start election Leader, current term: {}, last entry: {}");
+            if (log.isDebugEnabled()) {
+                log.debug(
+                    "Node {} will become CANDIDATE and start election Leader, current term: {}, last entry: {}",
+                    cluster.getSelf(),currentTerm,logModule.last()
+                );
+            }
+            preElectionTime = System.currentTimeMillis() + ThreadLocalRandom.current().nextInt(200) + 150;
+            currentTerm++;
+            votedFor = cluster.getSelf().getServerId();
+
+            ArrayList<Future> futures = new ArrayList<>(cluster.getPeers().size());
+            if (log.isDebugEnabled()) {
+                log.debug("Peers size : {}, peer list content : {}", cluster.getPeers().size(), cluster.getPeers());
+            }
+
+            cluster.getPeers().forEach(peer -> futures.add(threadPool.submit(() -> {
+                long lastTerm = 0L;
+                LogEntry last = logModule.last();
+                if (last != null) {
+                    lastTerm = last.getTerm();
+                }
+
+                RvoteParam param = new RvoteParam();
+                param.setTerm(currentTerm);
+                param.setCandidateId(cluster.getSelf().getServerId());
+                param.setLastLogIndex(1);
+                param.setLastLogTerm(lastTerm);
+
+                Request request = new Request(Request.R_VOTE, param, peer.getServerId());
+
+                return null;
+            })));
+
+
         }
     }
 
