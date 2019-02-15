@@ -13,7 +13,7 @@ public class RaftThread extends Thread {
     private static final Thread.UncaughtExceptionHandler uncaughtExceptionHandler = (t, e)
     -> log.warn("Exception occurred from RaftThread {}", t.getName(), e);
 
-    public RaftThread(String threadName, Runnable runnable) {
+    public RaftThread(Runnable runnable, String threadName) {
         super(runnable, threadName);
         setUncaughtExceptionHandler(uncaughtExceptionHandler);
     }
