@@ -2,11 +2,13 @@ package com.fastpowered.raft.protocol.impl;
 
 import com.fastpowered.raft.current.RaftThreadPool;
 import com.fastpowered.raft.dto.RaftOptions;
-import com.fastpowered.raft.protocol.LifeCycle;
-import com.fastpowered.raft.protocol.LogModule;
-import com.fastpowered.raft.protocol.Node;
-import com.fastpowered.raft.protocol.NodeStatus;
+import com.fastpowered.raft.protocol.*;
+import com.fastpowered.raft.rpc.RaftClient;
+import lombok.Data;
 
+import java.util.Map;
+
+@Data
 public abstract class AbstractNode implements Node, LifeCycle {
 
     /**
@@ -35,20 +37,34 @@ public abstract class AbstractNode implements Node, LifeCycle {
     protected volatile long preHeartBeatTime = 0;
 
     /**
-     * 最后一次知道的任期号，初始化为0，持续递增
+     * 已知的最大的已经被提交的日志条目的索引值
      */
-    protected volatile long currentTerm = 0;
+    protected volatile long commitIndex;
 
     /**
-     * 给谁投票
+     * 最后被应用到状态机的日志条目索引值（初始化为 0，持续递增)
      */
-    protected volatile String votedFor;
+    volatile long lastApplied = 0;
 
     protected Cluster cluster = Cluster.getInstance();
 
     protected LogModule logModule;
 
     protected RaftThreadPool threadPool;
+
+    protected RaftClient raftClient;
+
+    /**
+     *  对于每一个服务器，需要发送给他的下一个日志条目的索引值（初始化为领导人最后索引值加一）
+     */
+    protected Map<Peer, Long> nextIndexs;
+
+    /**
+     * 对于每一个服务器，已经复制给他的日志的最高索引值
+     */
+    protected Map<Peer, Long> matchIndexs;
+
+    protected StateMachine stateMachine;
 
     @Override
     public void setOptions(RaftOptions options) {

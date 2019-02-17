@@ -20,6 +20,9 @@ public class RvoteResult implements Serializable {
      */
     private boolean voteGranted;
 
+    public RvoteResult() {
+    }
+
     public RvoteResult(boolean voteGranted) {
         this.voteGranted = voteGranted;
     }
