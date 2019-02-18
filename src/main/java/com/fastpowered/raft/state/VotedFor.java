@@ -1,8 +1,8 @@
 package com.fastpowered.raft.state;
 
 
-import com.fastpowered.raft.protocol.impl.Cluster;
-import com.fastpowered.raft.protocol.impl.Peer;
+import com.fastpowered.raft.protocol.Cluster;
+import com.fastpowered.raft.protocol.Peer;
 import org.springframework.util.StringUtils;
 
 /**

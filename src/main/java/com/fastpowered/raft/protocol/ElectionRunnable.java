@@ -4,8 +4,6 @@ import com.fastpowered.raft.current.RaftThreadPool;
 import com.fastpowered.raft.dto.LogEntry;
 import com.fastpowered.raft.dto.RvoteParam;
 import com.fastpowered.raft.dto.RvoteResult;
-import com.fastpowered.raft.protocol.impl.Cluster;
-import com.fastpowered.raft.protocol.impl.Peer;
 import com.fastpowered.raft.rpc.RaftClient;
 import com.fastpowered.raft.rpc.Request;
 import com.fastpowered.raft.rpc.Response;

@@ -1,4 +1,4 @@
-package com.fastpowered.raft.protocol.impl;
+package com.fastpowered.raft.protocol;
 
 import lombok.Data;
 
@@ -8,6 +8,9 @@ import java.util.Objects;
 public class Peer {
 
     private String serverId;
+
+    private long nextIndexs = 0;
+    private long matchIndexs = 0;
 
     public Peer(String serverId) {
         this.serverId = serverId;
