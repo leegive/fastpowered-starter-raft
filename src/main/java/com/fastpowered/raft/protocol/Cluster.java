@@ -25,7 +25,7 @@ public class Cluster {
 
     public static void addPeer(String serverId) {
         Peer peer = new Peer(serverId);
-        peer.setNextIndexs(SingletonHolder.INSTANCE.logModule.lastIndex() + 1);
+        peer.setNextIndexs(SingletonHolder.INSTANCE.logModule.getLastIndex() + 1);
         peer.setMatchIndexs(0L);
         SingletonHolder.INSTANCE.peers.add(peer);
     }

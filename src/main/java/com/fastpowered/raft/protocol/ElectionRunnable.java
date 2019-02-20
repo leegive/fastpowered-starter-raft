@@ -1,16 +1,16 @@
 package com.fastpowered.raft.protocol;
 
 import com.fastpowered.raft.current.RaftThreadPool;
-import com.fastpowered.raft.dto.LogEntry;
-import com.fastpowered.raft.dto.RvoteParam;
-import com.fastpowered.raft.dto.RvoteResult;
+import com.fastpowered.raft.protocol.dto.LogEntry;
+import com.fastpowered.raft.protocol.dto.RvoteParam;
+import com.fastpowered.raft.protocol.dto.RvoteResult;
 import com.fastpowered.raft.rpc.RaftClient;
 import com.fastpowered.raft.rpc.Request;
 import com.fastpowered.raft.rpc.Response;
-import com.fastpowered.raft.state.CurrentTerm;
-import com.fastpowered.raft.state.ElectionTime;
-import com.fastpowered.raft.state.Status;
-import com.fastpowered.raft.state.VotedFor;
+import com.fastpowered.raft.protocol.state.CurrentTerm;
+import com.fastpowered.raft.protocol.state.ElectionTime;
+import com.fastpowered.raft.protocol.state.Status;
+import com.fastpowered.raft.protocol.state.VotedFor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,12 +71,12 @@ public class ElectionRunnable implements Runnable {
         List<Peer> peers = Cluster.getInstance().getPeers();
         List<Future> futures = new ArrayList<>(peers.size());
         peers.forEach(peer -> futures.add(pool.submit(()->{
-            LogEntry lastLogEntry = logModule.last();
+            LogEntry lastLogEntry = logModule.getLast();
             long lastTerm = lastLogEntry != null ? lastLogEntry.getTerm() : 0L;
             RvoteParam param = new RvoteParam();
             param.setTerm(CurrentTerm.get());
             param.setCandidateId(Cluster.getInstance().getSelf().getServerId());
-            param.setLastLogIndex(logModule.lastIndex());
+            param.setLastLogIndex(logModule.getLastIndex());
             param.setLastLogTerm(lastTerm);
             Request request = new Request(Request.R_VOTE, param, peer.getServerId());
             Response<RvoteResult> response = raftClient.send(request);

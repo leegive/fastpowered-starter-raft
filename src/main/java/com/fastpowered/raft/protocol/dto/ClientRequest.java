@@ -1,4 +1,4 @@
-package com.fastpowered.raft.dto;
+package com.fastpowered.raft.protocol.dto;
 
 import lombok.Data;
 import lombok.NonNull;

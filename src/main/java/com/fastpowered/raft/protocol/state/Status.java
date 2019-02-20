@@ -1,4 +1,4 @@
-package com.fastpowered.raft.state;
+package com.fastpowered.raft.protocol.state;
 
 /**
  * 节点状态

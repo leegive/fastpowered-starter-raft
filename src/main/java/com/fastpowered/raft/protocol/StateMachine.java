@@ -1,6 +1,6 @@
 package com.fastpowered.raft.protocol;
 
-import com.fastpowered.raft.dto.LogEntry;
+import com.fastpowered.raft.protocol.dto.LogEntry;
 
 /**
  * 复制状态机

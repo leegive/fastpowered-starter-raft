@@ -1,4 +1,4 @@
-package com.fastpowered.raft.state;
+package com.fastpowered.raft.protocol.state;
 
 import java.util.concurrent.ThreadLocalRandom;
 

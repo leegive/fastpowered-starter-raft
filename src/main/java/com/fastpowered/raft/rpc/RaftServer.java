@@ -6,6 +6,4 @@ public interface RaftServer {
 
     void stop();
 
-    Response handlerRequest(Request request);
-
 }

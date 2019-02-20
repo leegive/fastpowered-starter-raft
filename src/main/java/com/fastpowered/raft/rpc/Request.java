@@ -1,8 +1,8 @@
 package com.fastpowered.raft.rpc;
 
-import com.fastpowered.raft.dto.AentryParam;
-import com.fastpowered.raft.dto.ClientRequest;
-import com.fastpowered.raft.dto.RvoteParam;
+import com.fastpowered.raft.protocol.dto.AentryParam;
+import com.fastpowered.raft.protocol.dto.ClientRequest;
+import com.fastpowered.raft.protocol.dto.RvoteParam;
 import lombok.Data;
 
 import java.io.Serializable;

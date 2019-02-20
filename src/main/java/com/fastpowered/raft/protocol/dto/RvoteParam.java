@@ -1,6 +1,5 @@
-package com.fastpowered.raft.dto;
+package com.fastpowered.raft.protocol.dto;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
